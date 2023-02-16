@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 09:45:33 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/13 16:55:18 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:27:43 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	malloc_all(t_input *input, char **argv)
 	input -> itxt[2] = NULL;
 	input -> otxt[2] = NULL;
 	input -> commd[amount_all] = NULL;
-
 }
 
 char	*ft_strdup_char(char *s1, char c, int a)

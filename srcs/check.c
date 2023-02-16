@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:51:33 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/02 10:41:40 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/14 11:27:59 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_pipe(char *input, int i)
 		if (i < 0)
 			return (1);
 		if (input[i] != ' ' && input[i] != '|')
-			break;
+			break ;
 		i--;
 	}
 	i = c_i;

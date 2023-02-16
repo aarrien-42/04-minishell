@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:26:23 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/14 09:22:18 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:13:35 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,6 @@ void	fill_up_env(char **env, t_env	**list)
 	while (env[i])
 	{
 		addlast(env[i], list);
-		i++;
-	}
-}
-
-// env
-void	printf_list(t_env **lst)
-{
-	t_env	*ds;
-	int		i;
-
-	ds = *lst;
-	i = 0;
-	while (ds != NULL)
-	{
-		printf("%d --> env==|%s|  \n", i, ds->env);
-		ds = ds ->next;
 		i++;
 	}
 }
@@ -125,4 +109,19 @@ void	eliminate_one(char *content, t_env	**list)
 	final = deleted -> next;
 	free(deleted);
 	ds ->next = final;
+}
+
+void	print_env(t_env	**list)
+{
+	t_env	*ds;
+
+	ds = (*list);
+	while (ds -> next != NULL)
+	{
+		ft_putstr_fd(ds -> env, 1);
+		ft_putstr_fd("\n", 1);
+		ds = ds -> next;
+	}
+	ft_putstr_fd(ds -> env, 1);
+	ft_putstr_fd("\n", 1);
 }

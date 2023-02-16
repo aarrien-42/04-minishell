@@ -6,7 +6,7 @@
 /*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:59:48 by ubegona           #+#    #+#             */
-/*   Updated: 2023/01/31 12:23:35 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/16 09:26:19 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	change_caracter(t_input *input)
 			input->entrada[i] = 18;
 		if (quote != 0 && input->entrada[i] == '>')
 			input->entrada[i] = 17;
+		if (quote != 0 && input->entrada[i] == '|')
+			input->entrada[i] = 16;
 		i++;
 	}
 }

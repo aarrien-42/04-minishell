@@ -6,7 +6,7 @@
 /*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:25:38 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/01/31 12:23:26 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:35:03 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	ft_putstr_fd(char *s, int fd)
 		if (s[i] == 18)
 		{
 			ft_putchar_fd('<', fd);
+			i++;
+		}
+		if (s[i] == 16)
+		{
+			ft_putchar_fd('|', fd);
 			i++;
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:31:08 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/14 09:54:59 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:13:21 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,25 @@ int	main(int ac, char **av, char **env)
 		input->entrada = readline("minishell> ");
 		if (input->entrada == NULL)
 			break ;
-		if (*input -> entrada != 0)
-			add_history (input -> entrada);
+		if (*input->entrada != 0)
+			add_history (input->entrada);
 		else
-			continue;
+			continue ;
+		if (check_input(input->entrada) != 0)
+		{
+			printf("INPUT ERROR\n");
+			continue ;
+		}
 		change_caracter(input);
-		input ->entrada = add_space(input->entrada, '|');
-		input ->entrada = add_space(input->entrada, '<');
-		input ->entrada = add_space(input->entrada, '>');
+		input->entrada = add_space(input->entrada, '|');
+		input->entrada = add_space(input->entrada, '<');
+		input->entrada = add_space(input->entrada, '>');
 		fill_up_env(env, &list);
 		argv = input_split(input -> entrada, &list);
 		fill_up_input(argv, input);
 		free(input -> entrada);
-		ft_pipex(input);
+		ft_pipex(input, &list);
+
 	}
 	return (0);
 }

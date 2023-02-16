@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 08:57:58 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/14 09:53:36 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:08:42 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_input
 	char	**commd;
 	char	**env_var;
 	int		**io_pipe;
-	t_pipex		*pipex;
+	t_pipex	*pipex;
 }				t_input;
 
 typedef struct s_env
@@ -63,6 +63,13 @@ typedef struct s_env
 void	print_struckt(t_input	*input);
 int		main(int argc, char **argv, char **envp);
 
+/*-CHECK-*/
+int		check_pipe(char *input, int i);
+int		check_right(char *input, int i, char c);
+int		check_input_loop(char *input, int *i, int *re_l, int *re_r);
+int		check_input(char *input);
+
+
 /*-FILL__INPUT-*/
 int		count_all(t_input *input, char **argv);
 void	malloc_all(t_input *input, char **argv);
@@ -71,10 +78,10 @@ void	fill_up_input(char	**argv, t_input *input);
 int		last_is_char(char *str);
 
 /*-BUILT-*/
-void	choose_command(t_input	*input);
+int		choose_command(char **cmd, t_env **list);
 void	ft_echo(char **str);
-void	ft_cd(char *path);
-void	ft_pwd(void);
+void	ft_cd(char **cmd);
+void	ft_pwd(char **cmd);
 
 /*-ENV_LIST-*/
 void	addlast(char *content, t_env **anterior);
@@ -83,6 +90,7 @@ void	printf_list(t_env **lst);
 int		find_one(char *content, t_env	**list);
 char	*find_var(char *content, t_env	**list);
 void	eliminate_one(char *content, t_env	**list);
+void	print_env(t_env	**list);
 
 /*-INPUT_SPLIT-*/
 int		jump_next_block(char *input, int i);
@@ -107,13 +115,13 @@ char	*add_space(char *entrada, char c);
 char	*add_char(char *entrada, char c, int pos);
 
 /*-FT_PIPEX-*/
-void	ft_child(t_pipex *gen, int i);
-int		ft_fork(t_pipex *gen);
+void	ft_child(t_pipex *gen, int i, t_env **list);
+int		ft_fork(t_pipex *gen, t_env **list);
 int		count_pipes(char	**str);
 void	fill_cmds(t_input	*input);
 char	*attach_path(char *cmd);
 void	ft_open(t_input	*input);
-int		ft_pipex(t_input	*input);
+int		ft_pipex(t_input	*input, t_env **list);
 
 /*-FT_PIPEX_UTILS-*/
 void	ft_here_doc(char *limit);
