@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:51:33 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/14 11:27:59 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/20 08:59:24 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,20 @@ int	check_input_loop(char *input, int *i, int *re_l, int *re_r)
 	return (0);
 }
 
+int	check_empty(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_input(char *input)
 {
 	int		i;
@@ -87,6 +101,8 @@ int	check_input(char *input)
 	quote = 0;
 	re_l = 0;
 	re_r = 0;
+	if (check_empty(input) != 0)
+		return (1);
 	while (i < (int)ft_strlen(input) && input[++i])
 	{
 		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))

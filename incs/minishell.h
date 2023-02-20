@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 08:57:58 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/16 17:08:42 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:45:23 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	fill_up_input(char	**argv, t_input *input);
 int		last_is_char(char *str);
 
 /*-BUILT-*/
-int		choose_command(char **cmd, t_env **list);
+int		choose_command_child(char **cmd, t_env **list);
+int		choose_command_father(char **cmd, t_env **list);
 void	ft_echo(char **str);
 void	ft_cd(char **cmd);
 void	ft_pwd(char **cmd);
@@ -99,15 +100,16 @@ int		save_word(char *start, char **word);
 char	**input_split(char *input, t_env **list);
 
 /*-CLEAN_BLOCK-*/
-char	*manage_dollar(char *str, t_env	**list);
-int		count_chars(char *block, t_env	**list);
+char	*manage_dollar(char *str, t_env	**list, char *end);
+int		count_chars(char *block, t_env	**list, char *end);
 void	create_new_block_loop(char *block, char *new_block, int *i, int *j, t_env	**list);
-char	*clean_block(char *block, t_env	**list);
+char	*clean_block(char *block, t_env	**list, char *end);
 
 /*-CHANGE_CARACTER-*/
 void	change_caracter(t_input *input);
 
 /*-SIGNALS-*/
+void	exec_handle_signal(int sig);
 void	handle_signal(int sig);
 
 /*-ADD_SPACES-*/
@@ -119,7 +121,7 @@ void	ft_child(t_pipex *gen, int i, t_env **list);
 int		ft_fork(t_pipex *gen, t_env **list);
 int		count_pipes(char	**str);
 void	fill_cmds(t_input	*input);
-char	*attach_path(char *cmd);
+char	*attach_path(char *cmd, t_env **list);
 void	ft_open(t_input	*input);
 int		ft_pipex(t_input	*input, t_env **list);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:38:09 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/02 10:42:18 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/17 08:57:38 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	**input_split(char *input, t_env	**list)
 	i = 0;
 	while (split[i])
 	{
-		split[i] = clean_block(split[i], list);
+		split[i] = clean_block(split[i], list, " \"\'^.*+?()[]{}|?¿!¡");
 		i++;
 	}
 	return (split);

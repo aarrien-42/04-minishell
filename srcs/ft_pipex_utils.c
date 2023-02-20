@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:34:22 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/14 09:52:52 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:50:40 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	ft_here_doc(char *limit)
 
 void	ft_error_msg(char *s1, char *s2)
 {
-	ft_putstr_fd(s1, 2);
-	ft_putstr_fd(s2, 2);
+	if (s1)
+		ft_putstr_fd(s1, 2);
+	if (s2)
+		ft_putstr_fd(s2, 2);
 	ft_putstr_fd("\n", 2);
 }
 

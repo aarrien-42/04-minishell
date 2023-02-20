@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:26:23 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/15 16:13:35 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/20 11:44:11 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-// export
 void	addlast(char *content, t_env **anterior)
 {
 	t_env	*siguiente;
@@ -45,7 +44,6 @@ void	fill_up_env(char **env, t_env	**list)
 	}
 }
 
-// getenv
 int	find_one(char *content, t_env	**list)
 {
 	t_env	*ds;
@@ -64,7 +62,6 @@ int	find_one(char *content, t_env	**list)
 	return (i);
 }
 
-// unset
 char	*find_var(char *content, t_env	**list)
 {
 	int		pos;

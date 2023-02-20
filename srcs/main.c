@@ -6,7 +6,7 @@
 /*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:31:08 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/15 16:13:21 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/17 08:49:51 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av, char **env)
 	input = malloc(sizeof(t_input));
 	input->pipex = malloc(sizeof(t_pipex));
 	input->pipex->env = env;
+	fill_up_env(env, &list);
 	while (1)
 	{
 		input->entrada = readline("minishell> ");
@@ -68,12 +69,10 @@ int	main(int ac, char **av, char **env)
 		input->entrada = add_space(input->entrada, '|');
 		input->entrada = add_space(input->entrada, '<');
 		input->entrada = add_space(input->entrada, '>');
-		fill_up_env(env, &list);
 		argv = input_split(input -> entrada, &list);
 		fill_up_input(argv, input);
 		free(input -> entrada);
 		ft_pipex(input, &list);
-
 	}
 	return (0);
 }

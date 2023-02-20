@@ -6,35 +6,50 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 09:44:43 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/16 17:28:42 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:54:20 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/minishell.h"
 
-int	choose_command(char **cmd, t_env **list)
+int	choose_command_child(char **cmd, t_env **list)
 {
 	int	exist;
 
 	exist = 0;
-	if (ft_strncmp(cmd[0], "/bin/echo", 100) == 0 && ++exist)
+	(void)list;
+	if (cmd[0] && ft_strncmp(cmd[0], "/bin/echo", 100) == 0 && ++exist)
 		ft_echo(cmd);
-	if (ft_strncmp(cmd[0], "/usr/bin/cd", 100) == 0 && ++exist)
+	if (cmd[0] && ft_strncmp(cmd[0], "/usr/bin/cd", 100) == 0 && ++exist)
 		ft_cd(cmd);
-	if (ft_strncmp(cmd[0], "/bin/pwd", 100) == 0 && ++exist)
+	if (cmd[0] && ft_strncmp(cmd[0], "/bin/pwd", 100) == 0 && ++exist)
 		ft_pwd(cmd);
-	if (ft_strncmp(cmd[0], "export", 100) == 0 && ++exist)
-		if (cmd[1])
-			addlast(cmd[1], list);
-	if (ft_strncmp(cmd[0], "unset", 100) == 0 && ++exist)
-		if (cmd[1])
-			eliminate_one(cmd[1], list);
-	if (ft_strncmp(cmd[0], "/usr/bin/env", 100) == 0 && ++exist)
-		print_env(list);
-	if (ft_strncmp(cmd[0], "exit", 100) == 0 && ++exist)
-		exit(0);
 	return (exist);
 }
+
+int	choose_command_father(char **cmd, t_env **list)
+{
+	int	exist;
+
+	exist = 0;
+	if (!cmd)
+		return (1);
+	if (cmd[0] && ft_strncmp(cmd[0], "/usr/bin/cd", 100) == 0 && ++exist)
+		ft_cd(cmd);
+	if (cmd[0] && ft_strncmp(cmd[0], "exit", 100) == 0 && ++exist)
+		exit(0);
+	if (cmd[0] && ft_strncmp(cmd[0], "export", 100) == 0 && ++exist)
+		if (cmd[1])
+			addlast(cmd[1], list);
+	if (cmd[0] && ft_strncmp(cmd[0], "unset", 100) == 0 && ++exist)
+		if (cmd[1])
+			eliminate_one(cmd[1], list);
+	if (cmd[0] && (ft_strncmp(cmd[0], "/usr/bin/env", 100) == 0 \
+		|| ft_strncmp(cmd[0], "env", 100) == 0) && ++exist)
+		print_env(list);
+	return (exist);
+}
+
 void	ft_echo(char **str)
 {
 	int	i;
