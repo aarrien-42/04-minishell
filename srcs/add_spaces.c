@@ -6,7 +6,7 @@
 /*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 10:31:24 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/09 09:41:42 by ubegona          ###   ########.fr       */
+/*   Updated: 2023/02/23 10:25:21 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ char	*add_space(char *entrada, char c)
 				i++;
 			}
 			if (entrada[i + 1] && entrada[i + 1] != c)
-			{
-				entrada = add_char(entrada, ' ', i);
-				i++;
-			}
+				entrada = add_char(entrada, ' ', i++);
 		}
 		i++;
 	}

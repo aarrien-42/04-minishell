@@ -9,19 +9,20 @@ INC = incs
 
 # Ficheros
 SRC_FILES = main fill_input built input_split clean_block env_list \
-	check change_caracter signals add_spaces ft_pipex ft_pipex_utils
+	check change_caracter signals add_spaces ft_pipex ft_pipex_utils ft_fill \
+	export free_malloc
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 # Comandos
-CC = gcc
+CC = gcc  
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra  -g # -fsanitize=address
 RM = rm -f
 AR = ar rcs
 
-# REGLAS #
+# REGLAS
 all: $(NAME)
 
 # Compilar conjuntamente

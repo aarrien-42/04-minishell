@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:26:23 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/20 11:44:11 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:16:06 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	fill_up_env(char **env, t_env	**list)
 {
 	int		i;
 	t_env	*ds;
+	char	*temp;
 
 	i = 0;
 	ds = (*list);
-	ds -> env = ft_strdup(env[i++]);
+	ds -> env = ft_strdup("ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ");
 	ds -> next = NULL;
 	while (env[i])
 	{
-		addlast(env[i], list);
+		temp = ft_strdup(env[i]);
+		addlast(temp, list);
+		free(temp);
 		i++;
 	}
 }
@@ -51,6 +54,11 @@ int	find_one(char *content, t_env	**list)
 
 	i = 0;
 	ds = (*list);
+	if (ds -> next != NULL)
+	{
+		ds = ds -> next;
+		i++;
+	}
 	while (ds -> next != NULL
 		&& ft_strncmp(ds -> env, content, ft_strlen(content)))
 	{
@@ -68,10 +76,13 @@ char	*find_var(char *content, t_env	**list)
 	char	*string;
 	int		i;
 	t_env	*ds;
+	char	*temp;
 
 	i = 0;
 	ds = (*list);
-	pos = find_one(ft_strjoin(content, "="), list);
+	temp = ft_strjoin(content, "=");
+	pos = find_one(temp, list);
+	free(temp);
 	if (pos == -1)
 		return (NULL);
 	while (ds -> next != NULL && i < pos)
@@ -86,7 +97,7 @@ char	*find_var(char *content, t_env	**list)
 	return (&string[i + 1]);
 }
 
-void	eliminate_one(char *content, t_env	**list)
+t_env	**eliminate_one(char *content, t_env	**list)
 {
 	int		pos;
 	int		i;
@@ -97,6 +108,8 @@ void	eliminate_one(char *content, t_env	**list)
 	pos = find_one(content, list);
 	i = 1;
 	ds = (*list);
+	if (pos == 0)
+		return (list = &(ds->next), free(ds->env), free(ds), list);
 	while (ds -> next != NULL && i < pos)
 	{
 		ds = ds -> next;
@@ -104,21 +117,8 @@ void	eliminate_one(char *content, t_env	**list)
 	}
 	deleted = ds -> next;
 	final = deleted -> next;
+	free(deleted -> env);
 	free(deleted);
 	ds ->next = final;
-}
-
-void	print_env(t_env	**list)
-{
-	t_env	*ds;
-
-	ds = (*list);
-	while (ds -> next != NULL)
-	{
-		ft_putstr_fd(ds -> env, 1);
-		ft_putstr_fd("\n", 1);
-		ds = ds -> next;
-	}
-	ft_putstr_fd(ds -> env, 1);
-	ft_putstr_fd("\n", 1);
+	return (list);
 }

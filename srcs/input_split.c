@@ -6,7 +6,7 @@
 /*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:38:09 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/02/17 08:57:38 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:39:51 by aarrien-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,8 @@ char	**input_split(char *input, t_env	**list)
 		j++;
 	}
 	split[blocks] = NULL;
-	i = 0;
-	while (split[i])
-	{
-		split[i] = clean_block(split[i], list, " \"\'^.*+?()[]{}|?¿!¡");
-		i++;
-	}
+	i = -1;
+	while (split[++i])
+		split[i] = clean_block(split[i], list, " \"\'^.*+()[]{}|¿!¡");
 	return (split);
 }

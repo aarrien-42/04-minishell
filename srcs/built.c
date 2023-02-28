@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarrien- <aarrien-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubegona <ubegona@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 09:44:43 by ubegona           #+#    #+#             */
-/*   Updated: 2023/02/20 11:54:20 by aarrien-         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:16:56 by ubegona          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	choose_command_child(char **cmd, t_env **list)
 
 	exist = 0;
 	(void)list;
-	if (cmd[0] && ft_strncmp(cmd[0], "/bin/echo", 100) == 0 && ++exist)
+	if (cmd[0] && (ft_strncmp(cmd[0], "/bin/echo", 100) == 0
+			|| ft_strncmp(cmd[0], "echo", 100) == 0) && ++exist)
 		ft_echo(cmd);
 	if (cmd[0] && ft_strncmp(cmd[0], "/usr/bin/cd", 100) == 0 && ++exist)
 		ft_cd(cmd);
@@ -27,7 +28,7 @@ int	choose_command_child(char **cmd, t_env **list)
 	return (exist);
 }
 
-int	choose_command_father(char **cmd, t_env **list)
+int	choose_command_father(char **cmd, t_input *input, t_env **list)
 {
 	int	exist;
 
@@ -37,10 +38,12 @@ int	choose_command_father(char **cmd, t_env **list)
 	if (cmd[0] && ft_strncmp(cmd[0], "/usr/bin/cd", 100) == 0 && ++exist)
 		ft_cd(cmd);
 	if (cmd[0] && ft_strncmp(cmd[0], "exit", 100) == 0 && ++exist)
+	{
+		ft_free_all(input, *list);
 		exit(0);
+	}
 	if (cmd[0] && ft_strncmp(cmd[0], "export", 100) == 0 && ++exist)
-		if (cmd[1])
-			addlast(cmd[1], list);
+		ft_export(cmd[1], list);
 	if (cmd[0] && ft_strncmp(cmd[0], "unset", 100) == 0 && ++exist)
 		if (cmd[1])
 			eliminate_one(cmd[1], list);
@@ -65,7 +68,8 @@ void	ft_echo(char **str)
 	while (str[i] && ft_strncmp(str[i], "|", 100) != 0)
 	{
 		ft_putstr_fd(str[i], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
+		if (str[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (!no_n)
